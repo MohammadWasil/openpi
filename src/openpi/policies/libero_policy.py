@@ -97,4 +97,5 @@ class LiberoOutputs(transforms.DataTransformFn):
         # dimension, we need to now parse out the correct number of actions in the return dict.
         # For Libero, we only return the first 7 actions (since the rest is padding).
         # For your own dataset, replace `7` with the action dimension of your dataset.
-        return {"actions": np.asarray(data["actions"][..., :7])}
+        # Franka Emika FR3 robot has 7 DoF + 1 gripper action, so we return the first 8 actions here.
+        return {"actions": np.asarray(data["actions"][..., :8])}
